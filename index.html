@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SWES - Staff Wear & Equipment Scheduler</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/main.css">
+  </head>
+  <body>
+    <!-- Header Navigation -->
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+        <section class="container-fluid">
+          <a class="navbar-brand fw-bold" href="index.html">
+            <i class="fas fa-hard-hat me-2"></i>SWES
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <section class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link active" href="index.html">
+                  <i class="fas fa-tachometer-alt me-1"></i>Dashboard
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="pages/history.html">
+                  <i class="fas fa-history me-1"></i>Equipment History
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="pages/calendar.html">
+                  <i class="fas fa-calendar-alt me-1"></i>Calendar
+                </a>
+              </li>
+            </ul>
+
+            <nav class="navbar-nav">
+              <section class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                >
+                  <i class="fas fa-user me-1"></i>John Doe
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item" href="#"
+                      ><i class="fas fa-user-cog me-2"></i>Profile</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#"
+                      ><i class="fas fa-cog me-2"></i>Settings</a
+                    >
+                  </li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li>
+                    <a class="dropdown-item" href="#"
+                      ><i class="fas fa-sign-out-alt me-2"></i>Logout</a
+                    >
+                  </li>
+                </ul>
+              </section>
+            </nav>
+          </section>
+        </section>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container-fluid py-4">
+      <section class="row">
+        <!-- Left Column - Create Reservation Form -->
+        <section class="col-lg-5 col-md-12 mb-4">
+          <article class="card shadow">
+            <header class="card-header bg-success text-white">
+              <h1 class="card-title mb-0 h5">
+                <i class="fas fa-plus-circle me-2"></i>Create New Reservation
+              </h1>
+            </header>
+            <section class="card-body">
+              <form id="reservationForm">
+                <!-- Employee ID -->
+                <fieldset class="mb-3">
+                  <label for="employeeId" class="form-label">Employee ID</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="employeeId"
+                    placeholder="Enter Employee ID"
+                    required
+                  />
+                  <div class="invalid-feedback">Employee ID is required.</div>
+                </fieldset>
+
+                <!-- Equipment Selection -->
+                <fieldset class="mb-3">
+                  <label for="equipmentType" class="form-label"
+                    >Equipment Type</label
+                  >
+                  <select class="form-select" id="equipmentType" required>
+                    <option value="">Select Equipment</option>
+                    <option value="boots">Safety Boots</option>
+                    <option value="vest">Safety Vest</option>
+                    <option value="helmet">Hard Hat</option>
+                    <option value="gloves">Safety Gloves</option>
+                    <option value="glasses">Safety Glasses</option>
+                    <option value="coveralls">Coveralls</option>
+                  </select>
+                  <div class="invalid-feedback">
+                    Please select an equipment type.
+                  </div>
+                </fieldset>
+
+                <!-- Reservation Date -->
+                <fieldset class="mb-3">
+                  <label for="reservationDate" class="form-label"
+                    >Desired Reservation Date</label
+                  >
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="reservationDate"
+                    required
+                  />
+                  <div class="invalid-feedback">
+                    Please select a valid date.
+                  </div>
+                </fieldset>
+
+                <!-- Additional Notes -->
+                <fieldset class="mb-3">
+                  <label for="notes" class="form-label"
+                    >Additional Notes (Optional)</label
+                  >
+                  <textarea
+                    class="form-control"
+                    id="notes"
+                    rows="3"
+                    placeholder="Any special requirements..."
+                  ></textarea>
+                </fieldset>
+
+                <button type="submit" class="btn btn-success w-100">
+                  <i class="fas fa-calendar-plus me-2"></i>Create Reservation
+                </button>
+              </form>
+            </section>
+          </article>
+
+          <!-- Recent Activity -->
+          <aside class="card shadow mt-4">
+            <header class="card-header bg-info text-white">
+              <h2 class="card-title mb-0 h6">
+                <i class="fas fa-clock me-2"></i>Recent Activity
+              </h2>
+            </header>
+            <section id="activity-items" class="card-body">
+                <!-- Here we are using JS to make it reusable -->
+            </section>
+          </aside>
+        </section>
+
+        <!-- Right Column - Mini Calendar -->
+        <section class="col-lg-7 col-md-12">
+          <article class="card shadow">
+            <header
+              class="card-header bg-primary text-white d-flex justify-content-between align-items-center"
+            >
+              <h2 class="card-title mb-0 h5">
+                <i class="fas fa-calendar me-2"></i>Available Dates
+              </h2>
+              <nav class="calendar-nav">
+                <button
+                  class="btn btn-outline-light btn-sm me-2"
+                  id="prevMonth"
+                >
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+                <span id="currentMonth">December 2024</span>
+                <button
+                  class="btn btn-outline-light btn-sm ms-2"
+                  id="nextMonth"
+                >
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+              </nav>
+            </header>
+            <section class="card-body p-3">
+              <section id="miniCalendar" class="mini-calendar"></section>
+
+              <!-- Legend -->
+              <aside class="calendar-legend mt-3">
+                <small class="d-flex flex-wrap gap-3">
+                  <span
+                    ><i class="fas fa-circle text-success me-1"></i
+                    >Available</span
+                  >
+                  <span
+                    ><i class="fas fa-circle text-danger me-1"></i
+                    >Unavailable</span
+                  >
+                  <span
+                    ><i class="fas fa-circle text-warning me-1"></i>Partially
+                    Available</span
+                  >
+                  <span
+                    ><i class="fas fa-circle text-primary me-1"></i>Today</span
+                  >
+                </small>
+              </aside>
+            </section>
+          </article>
+
+          <!-- Quick Stats -->
+          <section class="row mt-4">
+            <article class="col-md-4 mb-3">
+              <section class="card bg-success text-white">
+                <section class="card-body text-center">
+                  <i class="fas fa-check-circle fa-2x mb-2"></i>
+                  <h3 class="h4">23</h3>
+                  <small>Active Reservations</small>
+                </section>
+              </section>
+            </article>
+            <article class="col-md-4 mb-3">
+              <section class="card bg-warning text-dark">
+                <section class="card-body text-center">
+                  <i class="fas fa-clock fa-2x mb-2"></i>
+                  <h3 class="h4">5</h3>
+                  <small>Pending Returns</small>
+                </section>
+              </section>
+            </article>
+            <article class="col-md-4 mb-3">
+              <section class="card bg-info text-white">
+                <section class="card-body text-center">
+                  <i class="fas fa-boxes fa-2x mb-2"></i>
+                  <h3 class="h4">142</h3>
+                  <small>Available Items</small>
+                </section>
+              </section>
+            </article>
+          </section>
+
+          <!-- Equipment Status -->
+          <article class="card shadow mt-4">
+            <header class="card-header bg-secondary text-white">
+              <h2 class="card-title mb-0 h6">
+                <i class="fas fa-clipboard-list me-2"></i>Equipment Status
+              </h2>
+            </header>
+            <section class="card-body">
+              <section class="d-flex justify-content-between mb-2">
+                <span>Safety Boots</span>
+                <span class="badge bg-success">In Stock: 42</span>
+              </section>
+              <section class="d-flex justify-content-between mb-2">
+                <span>Safety Vest</span>
+                <span class="badge bg-warning">Low Stock: 8</span>
+              </section>
+              <section class="d-flex justify-content-between mb-2">
+                <span>Hard Hat</span>
+                <span class="badge bg-success">In Stock: 35</span>
+              </section>
+              <section class="d-flex justify-content-between mb-2">
+                <span>Safety Gloves</span>
+                <span class="badge bg-danger">Out of Stock</span>
+              </section>
+            </section>
+          </article>
+        </section>
+      </section>
+    </main>
+
+    <!-- Toast Notifications -->
+    <aside
+      class="toast-container position-fixed top-0 end-0 p-3"
+      style="z-index: 11"
+    >
+      <article id="successToast" class="toast" role="alert">
+        <header class="toast-header bg-success text-white">
+          <i class="fas fa-check-circle me-2"></i>
+          <strong class="me-auto">Success</strong>
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="toast"
+          ></button>
+        </header>
+        <section class="toast-body">Reservation created successfully!</section>
+      </article>
+
+      <article id="errorToast" class="toast" role="alert">
+        <header class="toast-header bg-danger text-white">
+          <i class="fas fa-exclamation-circle me-2"></i>
+          <strong class="me-auto">Error</strong>
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="toast"
+          ></button>
+        </header>
+        <section class="toast-body">
+          Something went wrong. Please try again.
+        </section>
+      </article>
+    </aside>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Initialize calendar
+        initMiniCalendar();
+
+        // Form validation and submission
+        const reservationForm = document.getElementById("reservationForm");
+        const successToast = new bootstrap.Toast(
+          document.getElementById("successToast")
+        );
+        const errorToast = new bootstrap.Toast(
+          document.getElementById("errorToast")
+        );
+
+        reservationForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          // Basic validation
+          let isValid = true;
+          const employeeId = document.getElementById("employeeId");
+          const equipmentType = document.getElementById("equipmentType");
+          const reservationDate = document.getElementById("reservationDate");
+
+          if (!employeeId.value.trim()) {
+            employeeId.classList.add("is-invalid");
+            isValid = false;
+          } else {
+            employeeId.classList.remove("is-invalid");
+          }
+
+          if (!equipmentType.value) {
+            equipmentType.classList.add("is-invalid");
+            isValid = false;
+          } else {
+            equipmentType.classList.remove("is-invalid");
+          }
+
+          if (!reservationDate.value) {
+            reservationDate.classList.add("is-invalid");
+            isValid = false;
+          } else {
+            reservationDate.classList.remove("is-invalid");
+          }
+
+          if (isValid) {
+            // Simulate form submission
+            setTimeout(() => {
+              successToast.show();
+              reservationForm.reset();
+
+              // Add to recent activity
+              addRecentActivity(
+                equipmentType.options[equipmentType.selectedIndex].text
+              );
+            }, 500);
+          } else {
+            errorToast.show();
+          }
+        });
+
+        // Calendar navigation
+        document
+          .getElementById("prevMonth")
+          .addEventListener("click", function () {
+            // In a real app, this would change the calendar view
+            console.log("Previous month clicked");
+          });
+
+        document
+          .getElementById("nextMonth")
+          .addEventListener("click", function () {
+            // In a real app, this would change the calendar view
+            console.log("Next month clicked");
+          });
+
+        // Initialize date input with tomorrow's date as default
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        document.getElementById("reservationDate").valueAsDate = tomorrow;
+      });
+    </script>
+  </body>
+</html>
