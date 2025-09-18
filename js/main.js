@@ -1,6 +1,3 @@
-// import "./form.js"
-console.log("hello from main");
-
 const activityItemsRef = document.getElementById("activity-items");
 let isActivitiesLoading = false;
 
@@ -148,30 +145,6 @@ function addRecentActivity(equipmentName) {
     activityFeed.removeChild(activityFeed.lastChild);
   }
 }
-
-/* 
-
-// we will extract data from there 
-              
-<article class="activity-item d-flex mb-2">
-                <figure class="activity-icon me-3">
-                  <span class="badge bg-success rounded-circle">
-                    <i class="fas fa-plus"></i>
-                  </span>
-                </figure>
-                <section class="activity-content">
-                  <time class="text-muted small">10:30 AM</time>
-                  <p class="mb-0">Reservation created for Safety Boots</p>
-                </section>
-              </article>
-
-*/
-
-// here we will have the main page component for the syste, we will make a nav-bar with bootstrap
-// then we will make the navigation to detect the url to get the active state for the nav-bar
-// then we will build the form and its loading and (success and error) systems
-// then we will add the functionality of submission using fetch() post== use prevent
-//
 
 const mockActivities = [
   {

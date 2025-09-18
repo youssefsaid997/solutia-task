@@ -1,5 +1,3 @@
-console.log('history list');
-
 
 /* 
 2. List View: Equipment Overview & History (UC-R5)
@@ -25,3 +23,4 @@ Empty State message when no data is found.
 
 
 */
+
